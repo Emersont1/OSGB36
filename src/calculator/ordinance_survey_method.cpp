@@ -1,7 +1,7 @@
 #include <calculator.hpp>
 #include <constants.hpp>
 
-OSGB36::LatLon ordonnance_survey_algorithm(double& x, double& y, double& z)
+OSGB36::LatLon ordinance_survey_algorithm(double& x, double& y, double& z)
 {
     using namespace OSGB36;
     double lambda = atan2(y, x);

@@ -12,7 +12,7 @@ src/calculator/geoid_convert.cpp
 src/calculator/olson.cpp
 src/calculator/grid_ref.cpp
 #src/calculator/zhu.cpp
-#src/calculator/ordonnance_survey_method.cpp
+#src/calculator/ordinance_survey_method.cpp
 )
 
 add_executable(test main.cpp)
