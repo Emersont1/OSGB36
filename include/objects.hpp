@@ -16,6 +16,12 @@ struct LatLon {
     double Alt;
     bool error = false;
 };
+
+struct ECEF {
+    double x;
+    double y;
+    double z;
+};
 }
 
 namespace OSGB36 {
@@ -33,6 +39,11 @@ struct NorthingEasting {
     bool error = false;
 };
 
+struct ECEF {
+    double x;
+    double y;
+    double z;
+};
 }
 
 #endif

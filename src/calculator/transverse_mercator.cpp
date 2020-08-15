@@ -5,15 +5,15 @@ OSGB36::NorthingEasting OSGB36::transverse_mercator(OSGB36::LatLon Coord)
 {
     OSGB36::NorthingEasting ne;
     // Check the data is in good range
-    
+
     if (((Coord.Lon < -7) || (Coord.Lon > 8)) && ((Coord.Lat < 49) || (Coord.Lat > 60))) {
         ne.error = true;
         // calculate it anyway, as you can get about as far east as verona
         //and still have a 6 Figure grid reference
     }
 
-    double lat = OSGB36::degrees_to_radians(Coord.Lat);
-    double lon = OSGB36::degrees_to_radians(Coord.Lon);
+    double lat = degrees_to_radians(Coord.Lat);
+    double lon = degrees_to_radians(Coord.Lon);
     double ht = Coord.Alt;
 
     double a = OSGB36::a;
@@ -45,13 +45,6 @@ OSGB36::NorthingEasting OSGB36::transverse_mercator(OSGB36::LatLon Coord)
 
     double y = I + (pow(P, 2.0) * II) + (pow(P, 4.0) * III) + (pow(P, 6.0) * IIIA);
     double x = OSGB36::e0 + (P * IV) + (pow(P, 3.0) * V) + (pow(P, 5.0) * VI);
-
-    /*
-        Shift s = (Shift)mShifts.CalculateShift(x, y);
-        double lLat = x + s.Easting;
-        double lLon = y + s.Northing;
-        double lHeight = pHeight - s.Height;
-    */
 
     ne.Easting = x;
     ne.Northing = y;

@@ -1,11 +1,25 @@
 #include <calculator.hpp>
 #include <constants.hpp>
 
-//http://danceswithcode.net/engineeringnotes/geodetic_to_ecef/geodetic_to_ecef.html
+// http://danceswithcode.net/engineeringnotes/geodetic_to_ecef/geodetic_to_ecef.html
+void _olsons_algorithm(double& x, double& y, double& z, double a, double e_sq, double* lon, double* lat, double* alt);
 
-OSGB36::LatLon olsons_algorithm(double& x, double& y, double& z)
+OSGB36::LatLon OSGB36::olsons_algorithm(OSGB36::ECEF p)
 {
-    using namespace OSGB36;
+    OSGB36::LatLon ll;
+    _olsons_algorithm(p.x, p.y, p.z, OSGB36::a, OSGB36::e_sq, &ll.Lon, &ll.Lat, &ll.Alt);
+    return ll;
+}
+
+WGS84::LatLon WGS84::olsons_algorithm(WGS84::ECEF p)
+{
+    WGS84::LatLon ll;
+    _olsons_algorithm(p.x, p.y, p.z, WGS84::a, WGS84::e_sq, &ll.Lon, &ll.Lat, &ll.Alt);
+    return ll;
+}
+
+void _olsons_algorithm(double& x, double& y, double& z, double a, double e_sq, double* lon, double* lat, double* alt)
+{
     double a1 = a * e_sq;
     const double a2 = a1 * a1;
     const double a3 = a1 * e_sq / 2;
@@ -15,26 +29,26 @@ OSGB36::LatLon olsons_algorithm(double& x, double& y, double& z)
 
     double zp, w2, w, r2, r, s2, c2, s, c, ss;
     double g, rg, rf, u, v, m, f, p;
-    double n, lat, lon, alt;
-    LatLon geo;
+    double n; //, lat, lon, alt;
+
     zp = abs(z);
     w2 = x * x + y * y;
     w = sqrt(w2);
     r2 = w2 + z * z;
     r = sqrt(r2);
-    geo.Lon = atan2(y, x); //Lon (final)
+    *lon = atan2(y, x); // Lon (final)
     s2 = z * z / r2;
     c2 = w2 / r2;
     u = a2 / r;
     v = a3 - a4 / r;
     if (c2 > 0.3) {
         s = (zp / r) * (1.0 + c2 * (a1 + u + s2 * v) / r);
-        geo.Lat = asin(s); //Lat
+        *lat = asin(s); // Lat
         ss = s * s;
         c = sqrt(1.0 - ss);
     } else {
         c = (w / r) * (1.0 - s2 * (a5 - u - c2 * v) / r);
-        geo.Lat = acos(c); //Lat
+        *lat = acos(c); // Lat
         ss = 1.0 - c * c;
         s = sqrt(ss);
     }
@@ -46,12 +60,11 @@ OSGB36::LatLon olsons_algorithm(double& x, double& y, double& z)
     f = c * u + s * v;
     m = c * v - s * u;
     p = m / (rf / g + f);
-    geo.Lat = geo.Lat + p; //Lat
-    geo.Alt = f + m * p / 2.0; //Altitude
+    *lat += p; // Lat
+    *alt = f + m * p / 2.0; // Altitude
     if (z < 0.0) {
-        geo.Lat *= -1.0; //Lat
+        *lat *= -1.0; // Lat
     }
-    geo.Lat = radians_to_degrees(geo.Lat);
-    geo.Lon = radians_to_degrees(geo.Lon);
-    return (geo); //Return Lat, Lon, Altitude in that order
+    *lat = radians_to_degrees(*lat);
+    *lon = radians_to_degrees(*lon);
 }

@@ -3,8 +3,8 @@
 #include <calculator.hpp>
 
 namespace OSGB36 {
-extern const double a = 6377563.396; //6378137.0;
-extern const double b = 6356256.909; //6356752.3141;
+extern const double a = 6377563.396; // 6378137.0;
+extern const double b = 6356256.909; // 6356752.3141;
 extern const double e_sq = (a * a - b * b) / (a * a);
 extern const double epsilon_sq = (a * a - b * b) / (b * b);
 
@@ -19,9 +19,9 @@ extern const double t_x = -446.448;
 extern const double t_y = 125.157;
 extern const double t_z = -542.060;
 extern const double s = 1 + 20.4894 / 1000000;
-extern const double r_x = OSGB36::seconds_to_radians(-0.1502);
-extern const double r_y = OSGB36::seconds_to_radians(-0.2470);
-extern const double r_z = OSGB36::seconds_to_radians(-0.8421);
+extern const double r_x = seconds_to_radians(-0.1502);
+extern const double r_y = seconds_to_radians(-0.2470);
+extern const double r_z = seconds_to_radians(-0.8421);
 
 }
 

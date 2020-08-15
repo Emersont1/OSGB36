@@ -4,19 +4,19 @@
 
 const string_t alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 
-inline string_t format(int num, int width){
-string_t base
+inline string_t format(int num, int width)
+{
+    string_t base
 #ifdef ARDUINO
-= String(num, DEC);
-#else 
-= std::to_string(num);
+        = String(num, DEC);
+#else
+        = std::to_string(num);
 #endif
 
-while (base.length() < width){
-base = "0"+base;
-}
-return base;
-
+    while (base.length() < width) {
+        base = "0" + base;
+    }
+    return base;
 }
 
 string_t OSGB36::grid_ref(OSGB36::NorthingEasting NE)
@@ -38,11 +38,11 @@ string_t OSGB36::grid_ref(OSGB36::NorthingEasting NE)
     string_t ref;
 
     string_t s;
-    s += alphabet[(int)el1 + 5*(4-nl1)];
-    s += alphabet[(int)el2 + 5*(4-nl2)];
-    s+= " ";
-    s+= format((e2+50)/100, 3);
-    s+= " ";
-    s+= format((n2+50)/100, 3);
+    s += alphabet[(int)el1 + 5 * (4 - nl1)];
+    s += alphabet[(int)el2 + 5 * (4 - nl2)];
+    s += " ";
+    s += format((e2 + 50) / 100, 3);
+    s += " ";
+    s += format((n2 + 50) / 100, 3);
     return s;
 }

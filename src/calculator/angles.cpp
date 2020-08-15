@@ -1,25 +1,35 @@
 #include <calculator.hpp>
 
-double OSGB36::degrees_to_radians(double degrees)
+double degrees_to_radians(double degrees)
 {
     return (degrees * M_PI) / 180;
 }
 
-double OSGB36::radians_to_degrees(double radians)
+double radians_to_degrees(double radians)
 {
     return (radians * 180) / M_PI;
 }
 
-double OSGB36::seconds_to_radians(double seconds)
+double seconds_to_radians(double seconds)
 {
-    return OSGB36::degrees_to_radians(seconds / 3600);
+    return degrees_to_radians(seconds / 3600);
 }
 
-double OSGB36::sign(double x)
+double sign(double x)
 {
     if (x > 0)
         return 1;
     if (x < 0)
         return -1;
     return 0;
+}
+
+double operator*(WGS84::ECEF& l, WGS84::ECEF& r)
+{
+    return l.x * r.x + l.y * r.y + l.z * r.z;
+}
+
+double operator*(OSGB36::ECEF& l, OSGB36::ECEF& r)
+{
+    return l.x * r.x + l.y * r.y + l.z * r.z;
 }
