@@ -12,6 +12,7 @@ src/calculator/helmert_transform.cpp
 src/calculator/olson.cpp
 src/calculator/grid_ref.cpp
 src/calculator/to_ECEF.cpp
+src/calculator/plus_code.cpp
 #src/calculator/zhu.cpp
 #src/calculator/ordinance_survey_method.cpp
 )

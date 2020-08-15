@@ -26,5 +26,7 @@ int main(int argc, char const* argv[])
 
     std::cout << "6 Figure Grid Reference:\t" << OSGB36::grid_ref(s) << std::endl;
 
+    std::cout << "Plus Code:\t" << WGS84::pluscode(ll) << std::endl;
+
     return 0;
 }
