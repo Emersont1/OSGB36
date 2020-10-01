@@ -10,3 +10,9 @@ OSGB36 Northing & Easting:      497809 371807
 ```
 
 Theoretically the grid references should work for a decent chunk of mainland europe, but I wouldn't bet on its accuracy
+
+## Roadmap (October 2020)
+
++ Make it use Templates i.e. `WGS84::LatLon` -> `LatLon<WGS84>`
++ Support UTM and Zone selection (Italian Kompass maps)
++ Support RGF93 with the GRS80 ellipsoid (French IGN Maps)
