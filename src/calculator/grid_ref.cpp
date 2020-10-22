@@ -22,8 +22,8 @@ inline string_t format(int num, int width)
 string_t OSGB36::grid_ref(OSGB36::NorthingEasting NE)
 {
 
-    unsigned int new_northing = (int)(500000.5 + NE.Northing);
-    unsigned int new_easting = (int)(1000000.5 + NE.Easting);
+    unsigned int new_northing = (int)(500050 + NE.Northing);
+    unsigned int new_easting = (int)(1000050 + NE.Easting);
 
     unsigned char nl1 = new_northing / 500000;
     unsigned int n = new_northing % 500000;
@@ -41,8 +41,8 @@ string_t OSGB36::grid_ref(OSGB36::NorthingEasting NE)
     s += alphabet[(int)el1 + 5 * (4 - nl1)];
     s += alphabet[(int)el2 + 5 * (4 - nl2)];
     s += " ";
-    s += format((e2 + 50) / 100, 3);
+    s += format(e2 / 100, 3);
     s += " ";
-    s += format((n2 + 50) / 100, 3);
+    s += format(n2 / 100, 3);
     return s;
 }
