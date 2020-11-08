@@ -1,6 +1,5 @@
 #include <calculator.hpp>
 #include <constants.hpp>
-#include <iostream>
 
 const string_t alphabet = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 
